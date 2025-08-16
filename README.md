@@ -1,5 +1,11 @@
 # aruba2mqtt
 
+This works for passive ble devices like Xiaomi thermometers but not for Flora/Flower Care
+
+supported:
+LYWSD03MMC ( temp/humidity sensor )
+
+
 ## Installation
 
 Create protbuf files
@@ -73,3 +79,21 @@ mqtt:
       icon: "mdi:water-percent"
       value_template: "{{ value_json.humidity | round(1) }}"
 ```
+
+    {
+[aruba2mqtt] |       "mac": "xHyNbI0J",
+[aruba2mqtt] |       "deviceClass": [
+[aruba2mqtt] |         "unclassified"
+[aruba2mqtt] |       ],
+[aruba2mqtt] |       "lastSeen": "1755334834",
+[aruba2mqtt] |       "bevent": {
+[aruba2mqtt] |         "event": "update"
+[aruba2mqtt] |       },
+[aruba2mqtt] |       "rssi": {
+[aruba2mqtt] |         "avg": -72
+[aruba2mqtt] |       },
+[aruba2mqtt] |       "stats": {
+[aruba2mqtt] |         "frameCnt": 14
+[aruba2mqtt] |       },
+[aruba2mqtt] |       "localName": "Flower care"
+[aruba2mqtt] |     }, 

@@ -5,7 +5,11 @@ __pycache__/
 *$py.class
 
 # proto mess
-aruba-iot-*
+aruba_iot_*
+*.zip
+bin/
+include/
+.vscode/
 
 # C extensions
 *.so
