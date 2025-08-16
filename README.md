@@ -21,28 +21,32 @@ python3 main.py
 ### Demo
 ![img.png](img.png)
 
-## Aruba 8 AoS configuration
+## Aruba 8.12+ AoS configuration
 
-reaplace <ip_address> with ip address of where you're running aruba2mqtt
+replace <ip_address> with ip address of where you're running aruba2mqtt. The websocket 
+URL appears to require something after ":7443/" before the AP will connect
+
 ```
 configure terminal
 
-iot radio-profile "ble-scan"
-    radio-mode ble
-    ble-opmode scanning
-    exit
+iot radio-profile ble-both
+  radio-mode ble
+  ble-console dynamic
+  ble-txpower -40
 
-  iot use-radio-profile "ble-scan"
+iot transportProfile aruba2mqtt
+  endpointURL ws://<ipaddress>:7443/aruba
+  endpointType telemetry-websocket
+  payloadContent all
+  payloadContent unclassified
+  endpointToken 1234
+  endpointID arubaiap
+  transportInterval 30
+  bleDataForwarding
 
-  iot transportProfile "ble-ws"
-    endpointType telemetry-websocket
-    endpointURL "ws://<ip_address>:7443/"
-    endpointToken "12345"
-    payloadContent all
-    bleDataForwarding
-    transportInterval 30
-    exit
-  iot useTransportProfile "ble-ws"
+iot use-radio-profile ble-both
+
+iot useTransportProfile aruba2mqtt
 ```
 
 ## Aruba AoS 8 debug commands

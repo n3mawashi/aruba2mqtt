@@ -17,4 +17,6 @@ RUN unzip protoc.zip && mv bin/protoc /usr/local/bin/protoc
 
 RUN /usr/local/bin/protoc -I=./aos8-iot-server-example-websocket/proto_files/source/ --python_out=. --pyi_out=./ ./aos8-iot-server-example-websocket/proto_files/source/aruba-iot-*
 
+EXPOSE 7443
+
 ENTRYPOINT [ "python3", "main.py" ]
