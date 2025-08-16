@@ -44,9 +44,9 @@ def handle_aruba_telemetry_proto_mesg(mesg):
                 logging.debug("Got data: %s", blepacket.data.hex())
                 dev.parse_payload(bytes(bytearray(blepacket.data)))
                 dev.rssi = blepacket.rssi
-                if(dev.temp != None and dev.humi != None):
+                if(dev.temp is not None and dev.humi is not None):
                     logging.info("[%s] Temperature: %s °C | Humidity: %s %% | RSSI: %s | Battery: %s %%", dev.name, dev.temp, dev.humi,
-                                 dev.rssi, dev.battery)
+                                dev.rssi, dev.battery)
                     mqtt.publish(dev)
             if blepacket.frameType == aruba_iot_nb_ble_data_pb2.BleFrameType.scan_rsp:
                 logging.debug("Found Device: %s (%s)", blepacket.data.decode("utf-8"), mac)
@@ -76,7 +76,7 @@ def receive(websocket):
 
 def main():
     mqtt.connect(mqtt_host)
-    with server.serve(receive, "0.0.0.0", 7443) as websock:
+    with server.serve(receive, "", 7443) as websock:
         websock.serve_forever()
 
 

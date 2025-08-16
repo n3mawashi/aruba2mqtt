@@ -33,7 +33,7 @@ class ATC:
                 # Object length: 2
                 # unsigned integer
 
-                logging.debug("Got bthome packet: %s", payload);
+                logging.debug("Got bthome packet: %s", payload)
 
                 # packet id
                 if payload[8:9].hex() == '00':

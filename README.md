@@ -21,7 +21,36 @@ python3 main.py
 ### Demo
 ![img.png](img.png)
 
+## Aruba 8 AoS configuration
 
+reaplace <ip_address> with ip address of where you're running aruba2mqtt
+```
+configure terminal
+
+iot radio-profile "ble-scan"
+    radio-mode ble
+    ble-opmode scanning
+    exit
+
+  iot use-radio-profile "ble-scan"
+
+  iot transportProfile "ble-ws"
+    endpointType telemetry-websocket
+    endpointURL "ws://<ip_address>:7443/"
+    endpointToken "12345"
+    payloadContent all
+    bleDataForwarding
+    transportInterval 30
+    exit
+  iot useTransportProfile "ble-ws"
+```
+
+## Aruba AoS 8 debug commands
+```
+show iot transportProfile
+show ap debug ble-table all 
+show ap debug ble-relay report
+```
 ### Home Assistant MQTT Configuration
 `configuration.yaml`
 ```
